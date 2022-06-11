@@ -4,24 +4,11 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 const galleryEl = document.querySelector('.gallery');
 
-const galerryImgAdd = array => {
-    array.map(({preview, original, description}) => {
-        const newImageEl = document.createElement('img');
-            newImageEl.src = preview
-            newImageEl.alt = description
-            newImageEl.classList.add('gallery__image')
-            
+const galleryItemsMarkup = galleryItems.map(({preview, original, description}) => 
+    `<a href="${original}" class="gallery__item"><img src="${preview}" alt="${description}" class="gallery__image bla"></a>`
+).join('') 
 
-        const newLinkEl = document.createElement('a')
-            newLinkEl.href = original
-            newLinkEl.classList.add("gallery__item")
-            newLinkEl.append(newImageEl)
-
-        galleryEl.append(newLinkEl)
-    }) 
-}
-
-galerryImgAdd(galleryItems)
+galleryEl.insertAdjacentHTML('beforeend', galleryItemsMarkup)
 
 new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
